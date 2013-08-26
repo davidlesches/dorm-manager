@@ -9,6 +9,8 @@ gem 'simple_form'
 gem 'inherited_resources'
 gem 'quiet_assets'
 gem 'thin'
+gem 'unicorn'
+gem 'capistrano'
 
 group :development do
   gem 'letter_opener'

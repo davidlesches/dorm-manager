@@ -1,0 +1,26 @@
+development:
+  adapter: mysql2
+  database: dorm
+  username: nycdevshop
+  password: teamawesome
+  host: localhost
+  pool: 25
+  timeout: 5000
+
+test:
+  adapter: mysql2
+  database: dorm_test
+  username: nycdevshop
+  password: teamawesome
+  host: localhost
+  pool: 25
+  timeout: 5000
+
+production:
+  adapter: mysql2
+  database: dorm_manager
+  username:
+  password:
+  host:
+  pool: 25
+  timeout: 5000
