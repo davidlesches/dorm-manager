@@ -11,13 +11,18 @@ class Report < ActiveRecord::Base
   attr_accessible :report_date
 
   # Class Methods
+  def self.for counselor
+    date = Time.zone.now.hour == 0 ? Time.zone.now.yesterday.to_date : Time.zone.now.to_date
+    counselor.reports.where('DATE(report_date) = ?', date).last
+  end
+
   def self.create_for_today
     Counselor.all.each { |c| c.reports.create!(report_date: Time.zone.now.to_date) }
   end
 
-  def self.for counselor
-    date = Time.zone.now.hour == 0 ? Time.zone.now.yesterday.to_date : Time.zone.now.to_date
-    counselor.reports.where('DATE(report_date) = ?', date).last
+  def self.daily_work # run this method every morning
+    Report.log_absentees
+    Report.mail_reports
   end
 
   def self.log_absentees
@@ -30,11 +35,16 @@ class Report < ActiveRecord::Base
     end
   end
 
-  def self.send_out
-    where('DATE(report_date) = ?', Time.zone.now.yesterday.to_date).each do |report|
-      # TODO Create NIL attendances for ppl without a record.
+  def self.mail_reports
+    out = []
+    not_logged = []
+
+    yesterday.each do |report|
+      out << report.attendances.out
+      not_logged << report.attendances.not_logged
     end
-    # TODO send out mailer
+
+    Mailer.report(out: out.flatten, not_logged: not_logged.flatten).deliver
   end
 
 end

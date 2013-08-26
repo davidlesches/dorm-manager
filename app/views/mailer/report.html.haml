@@ -1,0 +1,22 @@
+%h3 Bochrim Logged As 'Out'
+- if @out.none?
+  %p No-one was logged as 'out'.
+- else
+  %ul
+    - @out.each do |attendance|
+      %li
+        = attendance.student.name
+        = " (#{attendance.student.room.name})"
+
+%br
+%br
+
+%h3 Bochrim Not Logged At All
+- if @not_logged.none?
+  %p All bochrim were logged last night.
+- else
+  %ul
+    - @not_logged.each do |attendance|
+      %li
+        = attendance.student.name
+        = " (#{attendance.student.room.name})"

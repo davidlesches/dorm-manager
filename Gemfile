@@ -11,6 +11,7 @@ gem 'quiet_assets'
 gem 'thin'
 gem 'unicorn'
 gem 'capistrano'
+gem 'whenever', :require => false
 
 group :development do
   gem 'letter_opener'
