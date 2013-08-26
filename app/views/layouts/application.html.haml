@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title= title
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1" }
+    = csrf_meta_tags
+
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          .brand= CONFIG[:site_name]
+          - unless current_user.nil?
+            %ul.nav
+              %li
+
+            %ul.nav.pull-right
+              %li= link_to "Logout", logout_path
+
+    .container
+      .alerts
+        - flash.each do |x,y|
+          %div{class: "alert alert-#{x == :notice ? 'success' : 'error'}"}
+            %a.close{"data-dismiss" => "alert"}
+            = y
+
+      .main
+        = yield

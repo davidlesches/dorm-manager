@@ -1,0 +1,29 @@
+.row
+  - if @report.nil?
+    .span4 &nbsp;
+    .span4 There is no report to fill in. The daily report is available from 11PM - 1AM.
+    .span4 &nbsp;
+  - else
+    .span4 &nbsp;
+    .span4
+      %h1
+        Report for
+        = @report.report_date.strftime("%B %-d")
+      - current_user.rooms.order('name asc').each do |room|
+        %h5= room.name
+        %table.table.table-striped
+          - room.students.order('name asc').each do |student|
+            %tr
+              %td{ width: '60%' }= student.name
+              %td{ id: dom_id(student) }
+                - logged = @report.attendances.find_by_student_id(student.id)
+                - if logged.nil?
+                  = link_to 'In', attendances_path(attendance: { student_id: student.id, status: 'In' }), method: :post, remote: true, :class => 'btn btn-success'
+                  = link_to 'Out', attendances_path(attendance: { student_id: student.id, status: 'Out' }), method: :post, remote: true, :class => 'btn btn-danger'
+                - else
+                  - if logged.status == 'In'
+                    %span.green IN
+                  - elsif logged.status == 'Out'
+                    %span.red OUT
+                  = link_to 'Reset', reset_attendance_path(logged), remote: true, :class => 'btn btn-info pull-right'
+    .span4 &nbsp;

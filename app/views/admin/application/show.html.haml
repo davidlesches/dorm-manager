@@ -1,0 +1,7 @@
+%h1 #{resource_class} ##{resource.id}
+
+.nice_spacings
+  - resource.attributes.sort_by { |k, v| k }.each do |k, v|
+    .group
+      .title= k.titleize + ':'
+      .body= v

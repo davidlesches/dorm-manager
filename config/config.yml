@@ -1,0 +1,14 @@
+shared: &shared
+  site_name: DormManager
+
+development:
+  <<: *shared
+  root_url: http://localhost:3000
+
+test:
+  <<: *shared
+  root_url: http://localhost:3000
+
+production:
+  <<: *shared
+  root_url: http://google.com

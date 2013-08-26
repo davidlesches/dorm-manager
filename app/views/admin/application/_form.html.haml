@@ -1,0 +1,10 @@
+.form-horizontal
+  = simple_form_for([:admin, resource], html: { :class => 'form-horizontal' }, wrapper: :bootstrap) do |f|
+
+    .form-inputs
+      - resource.attributes.except("id", "created_at", "updated_at").each do |k, v|
+        = f.input k
+
+    .form-actions
+      = f.button :submit, class: 'btn btn-success'
+

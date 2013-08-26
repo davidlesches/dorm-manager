@@ -1,0 +1,10 @@
+.form-horizontal
+  = simple_form_for([:admin, @student], html: { :class => 'form-horizontal' }, wrapper: :bootstrap) do |f|
+
+    .form-inputs
+      = f.association :room
+      = f.input :name
+
+    .form-actions
+      = f.button :submit, class: 'btn btn-success'
+

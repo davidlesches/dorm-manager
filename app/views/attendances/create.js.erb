@@ -1,0 +1,8 @@
+var $container = $('#student_<%= @attendance.student.id %>');
+$container.find('a').fadeOut().remove();
+
+<% if @attendance.status == 'In' %>
+  $container.html('<span class="green">IN</span> <a href="/attendances/<%= @attendance.id %>/reset" class="btn btn-info pull-right" data-remote="true" rel="nofollow">Reset</a>').hide().fadeIn();
+<% elsif @attendance.status == 'Out' %>
+  $container.html('<span class="red">OUT</span> <a href="/attendances/<%= @attendance.id %>/reset" class="btn btn-info pull-right" data-remote="true" rel="nofollow">Reset</a>').hide().fadeIn();
+<% end %>

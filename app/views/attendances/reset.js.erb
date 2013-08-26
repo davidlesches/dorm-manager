@@ -1,0 +1,3 @@
+var $container = $('#student_<%= @attendance.student.id %>');
+var html = '<a href="/attendances?attendance%5Bstatus%5D=In&amp;attendance%5Bstudent_id%5D=<%= @attendance.student.id %>" class="btn btn-success" data-method="post" data-remote="true" rel="nofollow">In</a> <a href="/attendances?attendance%5Bstatus%5D=Out&amp;attendance%5Bstudent_id%5D=<%= @attendance.student.id %>" class="btn btn-danger" data-method="post" data-remote="true" rel="nofollow">Out</a>';
+$container.html(html);
