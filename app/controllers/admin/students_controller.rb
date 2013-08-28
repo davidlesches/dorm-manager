@@ -2,7 +2,7 @@ class Admin::StudentsController < Admin::ApplicationController
   inherit_resources
 
   def index
-    @students = Student.joins(:room).order('rooms.name asc, students.name asc')
+    @students = Student.includes(:room).order('rooms.name asc, students.name asc')
   end
 
   def create
