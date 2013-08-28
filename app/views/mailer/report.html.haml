@@ -6,7 +6,7 @@
     - @out.each do |attendance|
       %li
         = attendance.student.name
-        = " (#{attendance.student.room.name})"
+        = " (#{attendance.student.room.name})" if attendance.student.room
 
 %br
 %br
@@ -19,4 +19,4 @@
     - @not_logged.each do |attendance|
       %li
         = attendance.student.name
-        = " (#{attendance.student.room.name})"
+        = " (#{attendance.student.room.name})" if attendance.student.room
