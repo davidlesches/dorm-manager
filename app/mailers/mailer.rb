@@ -4,7 +4,7 @@ class Mailer < ActionMailer::Base
   def report options
     @out = options[:out]
     @not_logged = options[:not_logged]
-    mail :to => 'lesches01@gmail.com', :subject => "Dorm Report - #{Time.zone.now.strftime("%B %-d")}"
+    mail :to => 'lesches01@gmail.com, ylesches@gmail.com', :subject => "Dorm Report - #{Time.zone.now.strftime("%B %-d")}"
   end
 
 end
