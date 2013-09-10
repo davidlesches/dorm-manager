@@ -44,7 +44,7 @@ class Report < ActiveRecord::Base
       not_logged << report.attendances.not_logged
     end
 
-    Mailer.report(out: out.flatten, not_logged: not_logged.flatten).deliver
+    Mailer.report(out: out.flatten, not_logged: not_logged.flatten, reports: yesterday).deliver
   end
 
 end

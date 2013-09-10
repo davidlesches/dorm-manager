@@ -20,3 +20,17 @@
       %li
         = attendance.student.name
         = " (#{attendance.student.room.name})" if attendance.student.room
+
+%br
+%br
+
+%h3 Report Times
+%ul
+  - @reports.each do |report|
+    - if report.attendances.any?
+      %li
+        = report.counselor.name
+        began marking at
+        = report.attendances.first.created_at.strftime('%l:%M %p')
+        and finished at
+        = report.attendances.last.created_at.strftime('%l:%M %p')
