@@ -4,9 +4,10 @@
 - else
   %ul
     - @out.each do |attendance|
-      %li
-        = attendance.student.name
-        = " (#{attendance.student.room.name})" if attendance.student.room
+      - if attendance.student
+        %li
+          = attendance.student.name
+          = " (#{attendance.student.room.name})" if attendance.student.room
 
 %br
 %br
@@ -17,9 +18,10 @@
 - else
   %ul
     - @not_logged.each do |attendance|
-      %li
-        = attendance.student.name
-        = " (#{attendance.student.room.name})" if attendance.student.room
+      - if attendance.student
+        %li
+          = attendance.student.name
+          = " (#{attendance.student.room.name})" if attendance.student.room
 
 %br
 %br
