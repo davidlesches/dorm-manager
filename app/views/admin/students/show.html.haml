@@ -1,0 +1,57 @@
+%h1 #{resource_class} ##{resource.id}
+
+.nice_spacings
+  - resource.attributes.sort_by { |k, v| k }.each do |k, v|
+    .group
+      .title= k.titleize + ':'
+      .body= v
+
+  .group
+    .title In Total:
+    .body= @student.attendances.in.count
+
+  .group
+    .title Out Total:
+    .body= @student.attendances.out.count
+
+  .group
+    .title Not Logged Total:
+    .body= @student.attendances.not_logged.count
+
+%hr
+
+%h3 Out History
+- if @student.attendances.out.none?
+  None.
+- else
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+        %th Date
+
+    - @student.attendances.out.order('created_at desc').each_with_index do |item, index|
+      %tr
+        %td
+          = index + 1
+          \.
+        %td= item.created_at.strftime("%B %-d, %Y")
+
+%hr
+
+%h3 Not Logged History
+- if @student.attendances.not_logged.none?
+  None.
+- else
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Date
+
+    - @student.attendances.not_logged.order('created_at desc').each_with_index do |item, index|
+      %tr
+        %td
+          = index + 1
+          \.
+        %td= item.created_at.strftime("%B %-d, %Y")
+

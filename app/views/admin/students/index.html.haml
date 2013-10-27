@@ -8,6 +8,9 @@
       %th Counsellor
       %th Room
       %th Name
+      %th In
+      %th Out
+      %th NL
       %th{width: '30%'} Actions
 
   - collection.each do |item|
@@ -15,6 +18,15 @@
       %td= item.room.counselor.name if item.room && item.room.counselor
       %td= item.room.name if item.room
       %td= item.name
+      %td
+        In:
+        = item.attendances.in.count
+      %td
+        Out:
+        = item.attendances.out.count
+      %td
+        NL:
+        = item.attendances.not_logged.count
       %td
         = link_to 'Show', resource_path(item), class: 'btn btn-primary'
         = link_to 'Edit', edit_resource_url(item), class: 'btn btn-warning'
