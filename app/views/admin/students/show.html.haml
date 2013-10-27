@@ -29,7 +29,7 @@
       %th Out
       %th Not Logged
 
-  - @student.attendances.order('created_at desc').chunk { |i| i.created_at.strftime("%B %Y") }.each do |month, items|
+  - @student.attendances.order('created_at asc').chunk { |i| i.created_at.strftime("%B %Y") }.each do |month, items|
     %tr
       %td= month
       %td= items.select { |i| i.status == 'In'}.size
