@@ -20,7 +20,26 @@
 
 %hr
 
-%h3 Out History
+%h3 Monthly Breakdown
+%table.table.table-striped
+  %thead
+    %tr
+      %th Month
+      %th In
+      %th Out
+      %th Not Logged
+
+  - @student.attendances.order('created_at desc').chunk { |i| i.created_at.strftime("%B %Y") }.each do |month, items|
+    %tr
+      %td= month
+      %td= items.select { |i| i.status == 'In'}.size
+      %td= items.select { |i| i.status == 'Out'}.size
+      %td= items.select { |i| i.status == 'Not Logged'}.size
+
+
+%hr
+
+%h3 Complete Out History
 - if @student.attendances.out.none?
   None.
 - else
@@ -39,7 +58,7 @@
 
 %hr
 
-%h3 Not Logged History
+%h3 Complete Not Logged History
 - if @student.attendances.not_logged.none?
   None.
 - else
