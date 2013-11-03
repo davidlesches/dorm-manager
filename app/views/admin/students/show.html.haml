@@ -14,10 +14,6 @@
     .title Out Total:
     .body= @student.attendances.out.count
 
-  .group
-    .title Not Logged Total:
-    .body= @student.attendances.not_logged.count
-
 %hr
 
 %h3 Monthly Breakdown
@@ -27,14 +23,12 @@
       %th Month
       %th In
       %th Out
-      %th Not Logged
 
   - @student.attendances.order('created_at asc').chunk { |i| i.created_at.strftime("%B %Y") }.each do |month, items|
     %tr
       %td= month
       %td= items.select { |i| i.status == 'In'}.size
       %td= items.select { |i| i.status == 'Out'}.size
-      %td= items.select { |i| i.status == 'Not Logged'}.size
 
 
 %hr
@@ -50,24 +44,6 @@
         %th Date
 
     - @student.attendances.out.order('created_at asc').each_with_index do |item, index|
-      %tr
-        %td
-          = index + 1
-          \.
-        %td= item.created_at.strftime("%B %-d, %Y")
-
-%hr
-
-%h3 Complete Not Logged History
-- if @student.attendances.not_logged.none?
-  None.
-- else
-  %table.table.table-striped
-    %thead
-      %tr
-        %th Date
-
-    - @student.attendances.not_logged.order('created_at asc').each_with_index do |item, index|
       %tr
         %td
           = index + 1

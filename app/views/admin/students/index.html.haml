@@ -10,7 +10,6 @@
       %th Name
       %th In
       %th Out
-      %th NL
       %th{width: '30%'} Actions
 
   - collection.each do |item|
@@ -24,9 +23,6 @@
       %td
         Out:
         = item.attendances.out.count
-      %td
-        NL:
-        = item.attendances.not_logged.count
       %td
         = link_to 'Show', resource_path(item), class: 'btn btn-primary'
         = link_to 'Edit', edit_resource_url(item), class: 'btn btn-warning'
