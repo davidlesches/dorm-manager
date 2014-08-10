@@ -17,7 +17,13 @@ class Report < ActiveRecord::Base
   end
 
   def self.create_for_today
-    Counselor.all.each { |c| c.reports.create!(report_date: Time.zone.now.to_date) }
+    Counselor.all.each do |counselor|
+      report = counselor.reports.create!(report_date: Time.zone.now.to_date)
+      counselor.students.where('exemptions > 0').each do |student|
+        report.attendances.create!(student_id: student.id, status: 'Exempt')
+        student.update_attributes!(exemptions: student.exemptions - 1)
+      end
+    end
   end
 
   def self.daily_work # run this method every morning

@@ -23,7 +23,11 @@
                 - else
                   - if logged.status == 'In'
                     %span.green IN
+                  - elsif logged.status == 'Exempt'
+                    %span.green EXEMPT
                   - elsif logged.status == 'Out'
                     %span.red OUT
-                  = link_to 'Reset', reset_attendance_path(logged), remote: true, :class => 'btn btn-info pull-right'
+
+                  - unless logged.status == 'Exempt'
+                    = link_to 'Reset', reset_attendance_path(logged), remote: true, :class => 'btn btn-info pull-right'
     .span4 &nbsp;

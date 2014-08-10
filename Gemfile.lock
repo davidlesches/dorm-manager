@@ -29,6 +29,9 @@ GEM
       i18n (= 0.6.1)
       multi_json (~> 1.0)
     addressable (2.3.5)
+    airbrake (3.1.16)
+      builder
+      multi_json
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
     builder (3.0.4)
@@ -171,6 +174,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  airbrake
   bcrypt-ruby (~> 3.0.0)
   capistrano
   coffee-rails (~> 3.2.1)

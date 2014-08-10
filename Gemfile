@@ -12,6 +12,7 @@ gem 'thin'
 gem 'unicorn'
 gem 'capistrano'
 gem 'whenever', :require => false
+gem 'airbrake'
 
 group :development do
   gem 'letter_opener'

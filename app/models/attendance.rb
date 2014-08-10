@@ -8,6 +8,7 @@ class Attendance < ActiveRecord::Base
   scope :in, where(status: 'In')
   scope :out, where(status: 'Out')
   scope :not_logged, where(status: 'Not Logged')
+  scope :exempt, where(status: 'Exempt')
 
   # Attributes
   attr_accessible :status, :student_id
